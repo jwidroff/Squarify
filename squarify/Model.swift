@@ -173,7 +173,7 @@ class Model {
         var color2Return = UIColor()
         let colors = PieceColors()
         let pieceColors = colors.colors
-        let randomColors = ["red","blue","green","purple", "yellow", "orange"]//, "lightBlue", "teal", "purp"]
+        let randomColors = ["red","blue","green"]//,"purple"]//, "yellow", "orange"]//, "lightBlue", "teal", "purp"]
         let randomIndex = arc4random_uniform(UInt32(randomColors.count))
         color2Return = pieceColors[randomColors[Int(randomIndex)]]!
         return color2Return
@@ -349,8 +349,8 @@ class Model {
                     
                     find4Square() {
                         
-//                        updateBoard()
-//                        printVisualDisplay(type: "pieceID")
+                        updateBoard()
+                        printVisualDisplay(type: "pieceID")
                         
                         
                         resetPieces()
@@ -403,6 +403,7 @@ class Model {
                     for piece in group.pieces {
                         
                         piecesToDelete.append(piece)
+
                     }
                     
                     if !group2Delete.contains(where: { (groupZ) in
@@ -410,6 +411,7 @@ class Model {
                         groupZ.id == piece.groupNumber
                     }) {
                         group2Delete.append(group)
+//                        print("ADDED Group to delete with a group number of \(group.id)")
 
                     }
                 }
@@ -418,42 +420,29 @@ class Model {
         
         for piece in piecesToDelete {
             
-            print(piece.id)
+//            print("piece.id to delete \(piece.id)")
             
             
 
             delegate?.removeView(view: piece.view)
 
             
-            board.locationAndIDs[piece.indexes!] = nil
+//            board.locationAndIDs[piece.indexes!] = nil
             
             board.pieces.removeAll { (pieceB) -> Bool in
                 piece.id == pieceB.id
 
             }
         }
-        
-        for groupX in board.pieceGroups {
-            
-            for groupY in group2Delete {
                 
-                if groupX.id == groupY.id {
-                    
-                    board.pieceGroups.removeAll { (groupZ) in
-                        
-                        groupZ.id == groupX.id
-                        
-                    }
-                }
-                
-                    
-                
-                
+        for groupXXX in group2Delete {
+            board.pieceGroups.removeAll { (groupAA) in
+                groupAA.id == groupXXX.id
             }
         }
+
         
-        
-//        printVisualDisplay(type: "pieceID")
+        updateBoard()
         
         completion()
     }
@@ -503,15 +492,15 @@ class Model {
     }
     
     func setPieceCanMove(direction: Direction) {
-        print("NEW")
+//        print("NEW")
         
         
         setIndexes(direction: direction) //Sets the prev, current and next indexes. Also sets whether the piece can move one space
         
         updateBoard()
         
-        print("After Set Indexes")
-        printVisualDisplay(type: "pieceID")
+//        print("After Set Indexes")
+//        printVisualDisplay(type: "pieceID")
         
 //        checkGroup(direction: direction) //checks groups to see if any pieces cant move. If a piece cant move, the whole group is set to not being able to move
         
@@ -1094,6 +1083,8 @@ class Model {
     
     func groupPiecesTogether(completion: () -> Void?) {
         
+        //MARK: The problem that seems to persist is due to the fact that the groups that are being grouped together arent being deleted properly when they join together.
+        
         var piecesToSkip = [Piece]()
         
         for piece in board.pieces.sorted(by: { (piece1, piece2) in
@@ -1143,9 +1134,19 @@ class Model {
                                             groupPieces.removeAll { (pieceP) in
                                                 pieceP.id == piece1.id
                                             }
+                                            
+                                            board.pieceGroups.removeAll { (groupABC) in
+                                                groupABC.id == groupZ.id
+                                            }
+                                            
                                         }
+                                        
+                                        
                                     }
                                 }
+                                
+                                print("We found a match!")
+                                
                             }
                         }
                     }
@@ -1277,43 +1278,22 @@ class Model {
             
             for piece in board.pieces {
                 
-                print("Piece ID = \(piece.id)")
-                print("Piece Indexes \(piece.indexes)")
-                
                 if piece.indexes?.y != 0 {
                     
-                    print("piece Y index is not currently zero")
-                    
-                    print("piece.previousIndex before \(piece.previousIndex) ")
-                    print("piece.nextIndex before \(piece.nextIndexes) ")
-
                     
                     piece.previousIndex = piece.indexes
                     piece.nextIndexes = Indexes(x: (piece.indexes?.x!)! , y: (piece.indexes?.y)! - 1)
                     
-                    print("piece.previousIndex after \(piece.previousIndex) ")
-                    print("piece.nextIndex after \(piece.nextIndexes) ")
-
-                    
 //                    if board.locationAndIDs[piece.nextIndexes!] == nil {
-//
-//                        print("board.locationAndIDs[piece.nextIndexes!] == nil")
-//
 //
 //                        board.locationAndIDs[piece.nextIndexes!] = piece.id
 //                        board.locationAndIDs[piece.indexes!] = nil
 //                    } else {
 //
-//                        print("board.locationAndIDs[piece.nextIndexes!] != nil")
-//
-//
-//
 //                        piece.canMoveOneSpace = false
 //                    }
                 } else {
                     
-                    print("piece Y index is currently zero")
-
                     
                     piece.previousIndex = piece.indexes
                     piece.nextIndexes = piece.indexes
