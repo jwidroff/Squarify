@@ -35,7 +35,7 @@ import UIKit
 //Make a high score for most swipes
 //Make a soundtrack
 // No pieces should be added if no pieces actually moved
-
+// Change the groupnumber of the 1st piece to zero
 
 protocol ModelDelegate {
     func setUpGameViews(board: Board)
@@ -56,6 +56,7 @@ protocol ModelDelegate {
     func animateGrouping(piece: Piece)
     func disableGestures()
     func enableGestures()
+    func groupTogether(view: UIView, side: String, color: UIColor)
 }
 
 class Model {
@@ -336,39 +337,46 @@ class Model {
             
 //            printVisualDisplay(type: "pieceID")
 
-            
-            setNextPiece() {
+//            if piecesMoved == true {
                 
-
-                
-                groupPiecesTogether() {
-                    
-                    updateLabels()
+//                piecesMoved = false
+                setNextPiece() {
                     
 
                     
-                    find4Square() {
+                    groupPiecesTogether() {
                         
-                        updateBoard()
-                        printVisualDisplay(type: "pieceID")
+                        updateLabels()
                         
+
                         
-                        resetPieces()
-                        groupsThatHaveMovedBack.removeAll()
-                        groups2Return.removeAll()
-                        board.locationAndIDs.removeAll() //MARK: NEEDED
-                        piecesToMoveBack.removeAll()
-                        groupsThatHaveMoved.removeAll()
-                        delegate?.enableGestures()
+                        find4Square() {
+                            
+                            updateBoard()
+                            printVisualDisplay(type: "pieceID")
+                            
+                            
+                            resetPieces()
+                            groupsThatHaveMovedBack.removeAll()
+                            groups2Return.removeAll()
+                            board.locationAndIDs.removeAll() //MARK: NEEDED
+                            piecesToMoveBack.removeAll()
+                            groupsThatHaveMoved.removeAll()
+                            delegate?.enableGestures()
+                        }
+                        
+                    
+                        
                     }
                     
-                
+                    
                     
                 }
                 
-                
-                
-            }
+//            }
+            
+            
+ 
             
             
         }
@@ -458,8 +466,8 @@ class Model {
 //        printVisualDisplay(type: "pieceID")
         
         if piecesMovedX == true {
-            
             movePieces(direction: direction){}
+            piecesMoved = true
         }
         
         completion()
@@ -875,7 +883,7 @@ class Model {
             if piece.canMoveOneSpace == true {
                 
                 piecesMovedX = true
-                
+//                piecesMoved = true
                 delegate?.movePieceView(piece: piece)
                 
             }
@@ -1103,7 +1111,8 @@ class Model {
                     pieceB.id == piece.id
                 }) {
                     
-                    if pieceX.indexes == Indexes(x:piece.indexes?.x, y: (piece.indexes?.y!)! + 1)  || pieceX.indexes == Indexes(x:(piece.indexes?.x!)! + 1, y: (piece.indexes?.y!)!) {
+                    //If the piece in question has the same color piece either below it
+                    if pieceX.indexes == Indexes(x:piece.indexes?.x, y: (piece.indexes?.y!)! + 1) {
                         
                         if pieceX.color == piece.color {
                             
@@ -1145,11 +1154,116 @@ class Model {
                                     }
                                 }
                                 
+//
+//                                piece.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
+//                                pieceX.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
+//
+//
+//                                piece.view.layer.setNeedsDisplay()
+//                                piece.view.layer.setNeedsLayout()
+//
+//                                pieceX.view.layer.setNeedsDisplay()
+//                                pieceX.view.layer.setNeedsLayout()
+                                
+                                delegate?.groupTogether(view: piece.view, side: "bottom", color: piece.color)
+//                                delegate?.groupTogether(view: pieceX.view, side: "top")
+
+                                
+//                                for pieceABCD in board.pieces {
+//                                    
+//                                    if pieceABCD.id == piece.id || pieceABCD.id == pieceX.id {
+//                                        
+//                                        delegate?.groupTogether(view: pieceABCD.view, side: <#String#>)
+//
+//                                    }
+//                                    
+//                                }
+                                
+                                
+                                
                                 print("We found a match!")
                                 
                             }
                         }
                     }
+                    //If the piece in question has the same color piece to the right of it
+                    else if pieceX.indexes == Indexes(x:(piece.indexes?.x!)! + 1, y: (piece.indexes?.y!)!) {
+                        
+                        if pieceX.color == piece.color {
+                            
+                            if !piecesToSkip.contains(where: { (pieceA) in
+                                pieceA.id == pieceX.id
+                            }) {
+                                
+                                let groupIdToBeDeleted = pieceX.groupNumber
+                                
+                                let group2Remain = piece.groupNumber
+                                
+                                
+                                var groupPieces = returnGroup(groupNumber: pieceX.groupNumber).pieces
+                                
+                                for piece1 in groupPieces {
+                                    
+                                    piece1.groupNumber = piece.groupNumber
+                                    piecesToSkip.append(piece1)
+                                    
+                                    for groupZ in board.pieceGroups {
+                                        if groupZ.id == group2Remain {
+                                            
+                                            groupZ.pieces.append(piece1)
+                                        }
+                                        
+                                        if groupZ.id == groupIdToBeDeleted {
+                                            
+                                            groupPieces.removeAll { (pieceP) in
+                                                pieceP.id == piece1.id
+                                            }
+                                            
+                                            board.pieceGroups.removeAll { (groupABC) in
+                                                groupABC.id == groupZ.id
+                                            }
+                                            
+                                        }
+                                        
+                                        
+                                    }
+                                }
+                                
+//
+//                                piece.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
+//                                pieceX.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
+//
+//
+//                                piece.view.layer.setNeedsDisplay()
+//                                piece.view.layer.setNeedsLayout()
+//
+//                                pieceX.view.layer.setNeedsDisplay()
+//                                pieceX.view.layer.setNeedsLayout()
+                                
+                                delegate?.groupTogether(view: piece.view, side: "right", color: piece.color)
+//                                delegate?.groupTogether(view: pieceX.view, side: "left")
+
+                                
+//                                for pieceABCD in board.pieces {
+//
+//                                    if pieceABCD.id == piece.id || pieceABCD.id == pieceX.id {
+//
+//                                        delegate?.groupTogether(view: pieceABCD.view, side: <#String#>)
+//
+//                                    }
+//
+//                                }
+                                
+                                
+                                
+                                print("We found a match!")
+                                
+                            }
+                        }
+                    }
+                    
+                    
+                    
                 }
             }
         }

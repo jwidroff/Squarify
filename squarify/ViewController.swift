@@ -129,8 +129,8 @@ class ViewController: UIViewController {
         boardHeight = boardWidth
         widthCushion = 0
         heightCushion = 0
-        pieceWidth = boardWidth / CGFloat(model.board.widthSpaces) / 10 * 9.5
-        pieceHeight = boardHeight / CGFloat(model.board.heightSpaces) / 10 * 9.5
+        pieceWidth = boardWidth / CGFloat(model.board.widthSpaces) / 10 * 9.75
+        pieceHeight = boardHeight / CGFloat(model.board.heightSpaces) / 10 * 9.75
         distanceFromPieceCenter = (pieceWidth) / 2
     }
     
@@ -343,8 +343,164 @@ extension ViewController: ModelDelegate {
             
         } completion: { (true) in
 
+            
+            
         }
     }
+    
+    func groupTogether(view: UIView, side: String, color: UIColor) {
+        
+        print("Group Together called!")
+        
+//        for view in views {
+            
+            UIView.animate(withDuration: 1.0, animations: {
+                
+                //MARK: PLAY WITH THIS TO GET IT PERFECT. The problem seems to be that #1 the view being added is sometimes behind the pieces and also the color needs to be fixed
+                
+                
+                switch side {
+                    
+                case "right":
+                    
+                    
+                    let bridgeView = UIView(frame: CGRect(x: self.pieceWidth, y: 0, width: self.pieceWidth * 0.05, height: self.pieceHeight))
+                    
+                    bridgeView.backgroundColor = UIColor.red
+                    
+                    
+                    view.addSubview(bridgeView)
+                    
+                    view.bringSubviewToFront(bridgeView)
+
+//
+//
+//                    view.layer.sublayers?[0].shadowRadius = 0
+//
+//                    view.layer.sublayers?[0].shadowOffset = CGSize(width: 0, height: 0)
+//
+//                    view.layer.sublayers?[0].removeFromSuperlayer()
+
+                case "bottom":
+                    
+                    let bridgeView = UIView(frame: CGRect(x: 0, y: self.pieceHeight, width: self.pieceWidth, height: self.pieceHeight * 0.05))
+                    bridgeView.backgroundColor = UIColor.red
+                    
+                    view.addSubview(bridgeView)
+                    
+                    view.bringSubviewToFront(bridgeView)
+
+//                    view.layer.sublayers?[1].shadowOpacity = 0
+//                    view.layer.sublayers?[1].shadowColor = UIColor.clear.cgColor
+//                    view.layer.sublayers?[1].shadowRadius = 0
+//
+//                    view.layer.sublayers?[1].shadowOffset = CGSize(width: 0, height: 0)
+//
+//                    view.layer.sublayers?[1].removeFromSuperlayer()
+
+
+//                case "left":
+//
+//                    let bridgeView = UIView(frame: CGRect(x: -(self.pieceWidth * 0.025) / 2, y: 0, width: self.pieceWidth * 0.025, height: self.pieceHeight))
+//                    bridgeView.backgroundColor = UIColor.purple
+//
+//                    view.addSubview(bridgeView)
+//
+////                    view.layer.sublayers?[2].shadowOpacity = 0
+////                    view.layer.sublayers?[2].shadowRadius = 0
+////
+////                    view.layer.sublayers?[2].shadowOffset = CGSize(width: 0, height: 0)
+////
+////                    view.layer.sublayers?[2].removeFromSuperlayer()
+//
+//                case "top":
+//
+//
+//                    let bridgeView = UIView(frame: CGRect(x: 0, y: 0, width: self.pieceWidth * 0.025, height: self.pieceHeight))
+//                    bridgeView.backgroundColor = UIColor.purple
+//
+//                    view.addSubview(bridgeView)
+//
+////                    view.layer.sublayers?[3].shadowOpacity = 0
+////                    view.layer.sublayers?[3].shadowColor = UIColor.clear.cgColor
+////                    view.layer.sublayers?[3].shadowRadius = 0
+////
+////
+////                    view.layer.sublayers?[3].shadowOffset = CGSize(width: 0, height: 0)
+////
+////                    view.layer.sublayers?[3].removeFromSuperlayer()
+
+                default:
+                    
+                    break
+                    
+                    
+                    
+                }
+                
+                
+                
+//                for piece in self.model.board.pieces {
+                    
+//                    if piece.view.center == view.center {
+                        
+//                view.layer.sublayers?[0].backgroundColor = CGColor.init(red: 0.1, green: 0.2, blue: 0.3, alpha: 1.0)
+//                view.layer.sublayers?[1].backgroundColor = CGColor.init(red: 0.1, green: 0.2, blue: 0.3, alpha: 1.0)
+//                
+//                view.layer.sublayers?[0].shadowOpacity = 0
+                
+//                view.layer.sublayers?[1].shadowOpacity = 0
+
+//                if let viewQ = view as? ShapeView {
+//
+//                    print("It's a Shapeview")
+//
+////                    viewQ.changeColor(color: UIColor.purple)
+////                    viewQ.color = UIColor.purple
+//
+////                    viewQ.subviews[0].backgroundColor = UIColor.purple
+////                    viewQ.subviews[1].backgroundColor = UIColor.purple
+////
+////                    viewQ.backgroundColor = UIColor.purple
+////                    viewQ.setNeedsDisplay()
+////                    viewQ.setNeedsLayout()
+//
+//                    viewQ.layer.sublayers?[0].backgroundColor = CGColor.init(red: 0.1, green: 0.2, blue: 0.3, alpha: 1.0)
+//                    viewQ.layer.sublayers?[1].backgroundColor = CGColor.init(red: 0.1, green: 0.2, blue: 0.3, alpha: 1.0)
+//
+//                }
+                
+//                        view.backgroundColor = UIColor.purple
+
+//                    }
+                    
+                    
+//                }
+                
+                
+//                self.model.board.view.layer.mask?.shadowOpacity = 0.2
+//                self.model.board.view.bringSubviewToFront(view)
+//                let scale = CGAffineTransform(scaleX: 0.01, y: 0.01)
+//                self.model.board.view.layer.mask?.shadowOpacity = 0.1
+//                self.model.board.view.bringSubviewToFront(view)
+                
+//                view.transform = scale
+//                view.backgroundColor = .orange
+//                view.setNeedsLayout()
+//                view.setNeedsDisplay()
+                
+            }) { (true) in
+//                view.backgroundColor = UIColor.orange
+            }
+            
+            
+//        }
+        
+        
+        
+        
+    }
+    
     
     func animateGrouping(piece: Piece) {
         
@@ -587,7 +743,7 @@ extension ViewController: ModelDelegate {
         
         self.nextPiece = nextPiece
         model.board.view.addSubview(self.nextPiece.view)
-        makeSoft(view: self.nextPiece.view)
+//        makeSoft(view: self.nextPiece.view)
     }
     
     private func makeSoft(view: UIView) {
