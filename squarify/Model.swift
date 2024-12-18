@@ -1168,7 +1168,7 @@ class Model {
 //                                pieceX.view.layer.setNeedsDisplay()
 //                                pieceX.view.layer.setNeedsLayout()
                                 
-                                delegate?.groupTogether(view: piece.view, side: "bottom", color: piece.color)
+//                                delegate?.groupTogether(view: piece.view, side: "bottom", color: piece.color)
 //                                delegate?.groupTogether(view: pieceX.view, side: "top")
 
                                 
@@ -1243,7 +1243,7 @@ class Model {
 //                                pieceX.view.layer.setNeedsDisplay()
 //                                pieceX.view.layer.setNeedsLayout()
                                 
-                                delegate?.groupTogether(view: piece.view, side: "right", color: piece.color)
+//                                delegate?.groupTogether(view: piece.view, side: "right", color: piece.color)
 //                                delegate?.groupTogether(view: pieceX.view, side: "left")
 
                                 

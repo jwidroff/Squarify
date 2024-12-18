@@ -129,8 +129,8 @@ class ViewController: UIViewController {
         boardHeight = boardWidth
         widthCushion = 0
         heightCushion = 0
-        pieceWidth = boardWidth / CGFloat(model.board.widthSpaces) / 10 * 9.75
-        pieceHeight = boardHeight / CGFloat(model.board.heightSpaces) / 10 * 9.75
+        pieceWidth = boardWidth / CGFloat(model.board.widthSpaces)// / 10 * 9.75
+        pieceHeight = boardHeight / CGFloat(model.board.heightSpaces)// / 10 * 9.75
         distanceFromPieceCenter = (pieceWidth) / 2
     }
     
@@ -334,11 +334,11 @@ extension ViewController: ModelDelegate {
         
         UIView.animate(withDuration: 0.5) {
             
-            self.model.board.view.layer.mask?.shadowOpacity = 0.2
-            self.model.board.view.bringSubviewToFront(view)
+//            self.model.board.view.layer.mask?.shadowOpacity = 0.2
+//            self.model.board.view.bringSubviewToFront(view)
             let scale = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            self.model.board.view.layer.mask?.shadowOpacity = 0.1
-            self.model.board.view.bringSubviewToFront(view)
+//            self.model.board.view.layer.mask?.shadowOpacity = 0.1
+//            self.model.board.view.bringSubviewToFront(view)
             view.transform = scale
             
         } completion: { (true) in

@@ -30,8 +30,9 @@ class ShapeView : UIView {
 
         super.init(frame: frame)
         color = piece.color
-        makeSoft()
-        addLabel()
+        self.backgroundColor = color
+//        makeSoft()
+//        addLabel()
 //        setViewForGroups(piece: piece, groups: groups)
     }
     
