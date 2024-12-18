@@ -112,15 +112,15 @@ class Model {
         
         let piece100 = Piece(indexes: Indexes(x: 0, y: 0), color: red)
         let group100 = Group(pieces: [piece100])//, piece21, piece20, piece23, piece24, piece25])
-        group100.id = 100
+        group100.id = 0
         
-        let piece101 = Piece(indexes: Indexes(x: 1, y: 0), color: red)
-        let group101 = Group(pieces: [piece101])//, piece21, piece20, piece23, piece24, piece25])
-        group101.id = 101
-        
-        let piece102 = Piece(indexes: Indexes(x: 0, y: 1), color: red)
-        let group102 = Group(pieces: [piece102])//, piece21, piece20, piece23, piece24, piece25])
-        group102.id = 102
+//        let piece101 = Piece(indexes: Indexes(x: 1, y: 0), color: red)
+//        let group101 = Group(pieces: [piece101])//, piece21, piece20, piece23, piece24, piece25])
+//        group101.id = 101
+//
+//        let piece102 = Piece(indexes: Indexes(x: 0, y: 1), color: red)
+//        let group102 = Group(pieces: [piece102])//, piece21, piece20, piece23, piece24, piece25])
+//        group102.id = 102
         
         
         board.pieceGroups = [group100]//, group101, group102]//, group4, group5, group3, group2, group6, group7, group8]
@@ -321,6 +321,9 @@ class Model {
             
             piece.canMoveOneSpace = true
             piecesMovedX = false
+            for subviewX in piece.view.subviews {
+                piece.view.bringSubviewToFront(subviewX)
+            }
         }
     }
     
