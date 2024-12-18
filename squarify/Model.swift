@@ -1257,7 +1257,7 @@ class Model {
 //
 //                                }
                                 
-                                
+                                print(piece.color)
                                 
                                 print("We found a match!")
                                 

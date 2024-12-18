@@ -354,6 +354,37 @@ extension ViewController: ModelDelegate {
         
 //        for view in views {
             
+        
+//        "red" : UIColor.init(red: 0.8, green: 0.1, blue: 0.1, alpha: 0.6),
+//        "blue" : UIColor.init(red: 0.0, green: 0.1, blue: 0.9, alpha: 0.6),
+//        "green" : UIColor.init(red: 0.0, green: 9.0, blue: 0.4, alpha: 0.6),
+        var colorX = UIColor()
+        
+        let pieceColors = PieceColors()
+        
+        let colors = pieceColors.colors
+        switch color {
+            
+        case .red:
+            
+            colorX = colors["red"]!
+            
+        case .blue:
+            
+            colorX = colors["blue"]!
+
+        case .green:
+            
+            colorX = colors["green"]!
+
+            
+        default:
+            
+            
+            colorX = colors["yellow"]!
+        }
+        
+        
             UIView.animate(withDuration: 1.0, animations: {
                 
                 //MARK: PLAY WITH THIS TO GET IT PERFECT. The problem seems to be that #1 the view being added is sometimes behind the pieces and also the color needs to be fixed
@@ -364,14 +395,13 @@ extension ViewController: ModelDelegate {
                 case "right":
                     
                     
-                    let bridgeView = UIView(frame: CGRect(x: self.pieceWidth, y: 0, width: self.pieceWidth * 0.05, height: self.pieceHeight))
                     
-                    bridgeView.backgroundColor = UIColor.red
+                    let bridgeView = UIView(frame: CGRect(x: self.pieceWidth, y: 0, width: self.pieceWidth * 0.025, height: self.pieceHeight))
+                    
+                    bridgeView.backgroundColor = color
                     
                     
                     view.addSubview(bridgeView)
-                    
-                    view.bringSubviewToFront(bridgeView)
 
 //
 //
@@ -383,12 +413,10 @@ extension ViewController: ModelDelegate {
 
                 case "bottom":
                     
-                    let bridgeView = UIView(frame: CGRect(x: 0, y: self.pieceHeight, width: self.pieceWidth, height: self.pieceHeight * 0.05))
-                    bridgeView.backgroundColor = UIColor.red
+                    let bridgeView = UIView(frame: CGRect(x: 0, y: self.pieceHeight , width: self.pieceWidth, height: self.pieceHeight * 0.025))
+                    bridgeView.backgroundColor = color
                     
                     view.addSubview(bridgeView)
-                    
-                    view.bringSubviewToFront(bridgeView)
 
 //                    view.layer.sublayers?[1].shadowOpacity = 0
 //                    view.layer.sublayers?[1].shadowColor = UIColor.clear.cgColor
@@ -399,8 +427,18 @@ extension ViewController: ModelDelegate {
 //                    view.layer.sublayers?[1].removeFromSuperlayer()
 
 
-//                case "left":
+                case "left":
 //
+                    
+                    let bridgeView = UIView(frame: CGRect(x: -self.pieceWidth * 0.05, y: 0, width: self.pieceWidth * 0.05, height: self.pieceHeight))
+                    
+                    bridgeView.backgroundColor = colorX
+                    
+                    
+                    view.addSubview(bridgeView)
+                    
+//                    view.bringSubviewToFront(bridgeView)
+                    
 //                    let bridgeView = UIView(frame: CGRect(x: -(self.pieceWidth * 0.025) / 2, y: 0, width: self.pieceWidth * 0.025, height: self.pieceHeight))
 //                    bridgeView.backgroundColor = UIColor.purple
 //
@@ -413,9 +451,14 @@ extension ViewController: ModelDelegate {
 ////
 ////                    view.layer.sublayers?[2].removeFromSuperlayer()
 //
-//                case "top":
+                case "top":
 //
-//
+                    let bridgeView = UIView(frame: CGRect(x: 0, y: -self.pieceHeight * 0.05, width: self.pieceWidth, height: self.pieceHeight * 0.05))
+                    bridgeView.backgroundColor = colorX
+                    
+                    view.addSubview(bridgeView)
+                    
+//                    view.bringSubviewToFront(bridgeView)
 //                    let bridgeView = UIView(frame: CGRect(x: 0, y: 0, width: self.pieceWidth * 0.025, height: self.pieceHeight))
 //                    bridgeView.backgroundColor = UIColor.purple
 //
