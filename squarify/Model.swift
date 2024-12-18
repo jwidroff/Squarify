@@ -351,7 +351,7 @@ class Model {
                         
                         updateLabels()
                         
-
+                        
                         
                         find4Square() {
                             
@@ -368,7 +368,7 @@ class Model {
                             delegate?.enableGestures()
                         }
                         
-                    
+                        
                         
                     }
                     
@@ -1157,33 +1157,10 @@ class Model {
                                     }
                                 }
                                 
-//
-//                                piece.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
-//                                pieceX.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
-//
-//
-//                                piece.view.layer.setNeedsDisplay()
-//                                piece.view.layer.setNeedsLayout()
-//
-//                                pieceX.view.layer.setNeedsDisplay()
-//                                pieceX.view.layer.setNeedsLayout()
-                                
-//                                delegate?.groupTogether(view: piece.view, side: "bottom", color: piece.color)
-//                                delegate?.groupTogether(view: pieceX.view, side: "top")
+                                //MARK: THIS CAUSES AN ISSUE FOR TIMING
+//                                delegate?.animateGrouping(piece: piece)
+//                                delegate?.animateGrouping(piece: pieceX)
 
-                                
-//                                for pieceABCD in board.pieces {
-//                                    
-//                                    if pieceABCD.id == piece.id || pieceABCD.id == pieceX.id {
-//                                        
-//                                        delegate?.groupTogether(view: pieceABCD.view, side: <#String#>)
-//
-//                                    }
-//                                    
-//                                }
-                                
-                                
-                                
                                 print("We found a match!")
                                 
                             }
@@ -1232,32 +1209,10 @@ class Model {
                                     }
                                 }
                                 
-//
-//                                piece.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
-//                                pieceX.view.layer.backgroundColor = CGColor.init(red: 10, green: 10, blue: 20, alpha: 1.0)
-//
-//
-//                                piece.view.layer.setNeedsDisplay()
-//                                piece.view.layer.setNeedsLayout()
-//
-//                                pieceX.view.layer.setNeedsDisplay()
-//                                pieceX.view.layer.setNeedsLayout()
-                                
-//                                delegate?.groupTogether(view: piece.view, side: "right", color: piece.color)
-//                                delegate?.groupTogether(view: pieceX.view, side: "left")
+                                //MARK: THIS CAUSES AN ISSUE FOR TIMING
 
-                                
-//                                for pieceABCD in board.pieces {
-//
-//                                    if pieceABCD.id == piece.id || pieceABCD.id == pieceX.id {
-//
-//                                        delegate?.groupTogether(view: pieceABCD.view, side: <#String#>)
-//
-//                                    }
-//
-//                                }
-                                
-                                print(piece.color)
+//                                delegate?.animateGrouping(piece: piece)
+//                                delegate?.animateGrouping(piece: pieceX)
                                 
                                 print("We found a match!")
                                 

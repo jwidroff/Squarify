@@ -331,8 +331,8 @@ extension ViewController: ModelDelegate {
     func removeView(view: UIView) {
         
       
-        
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.25, delay: 0.5, animations: {
+//        UIView.animate(withDuration: 0.25) {
             
 //            self.model.board.view.layer.mask?.shadowOpacity = 0.2
 //            self.model.board.view.bringSubviewToFront(view)
@@ -341,11 +341,11 @@ extension ViewController: ModelDelegate {
 //            self.model.board.view.bringSubviewToFront(view)
             view.transform = scale
             
-        } completion: { (true) in
+//        } completion: { (true) in
 
             
             
-        }
+        })
     }
     
     func groupTogether(view: UIView, side: String, color: UIColor) {
@@ -548,20 +548,20 @@ extension ViewController: ModelDelegate {
     func animateGrouping(piece: Piece) {
         
         UIView.animate(withDuration: 0.25, delay: 0.00) {
-//            let transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-//            
-//            piece.view.transform = transform
+            let transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            
+            piece.view.transform = transform
             
             
         
             
         } completion: { (true) in
             
-//            UIView.animate(withDuration: 0.25) {
-//                let transform = CGAffineTransform(scaleX: 1, y: 1)
-//
-//                piece.view.transform = transform
-//            }
+            UIView.animate(withDuration: 0.25) {
+                let transform = CGAffineTransform(scaleX: 1, y: 1)
+
+                piece.view.transform = transform
+            }
             
         }
         
@@ -579,13 +579,20 @@ extension ViewController: ModelDelegate {
 //            self.nextPiece.view.removeFromSuperview()
             
             
-            UIView.animate(withDuration: 0.25, delay: 0.00, options: .curveEaseIn) {
+            UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseIn) {
                 
                 //            if let indexes = piece.indexes {
                 
                 piece.center = CGPoint(x: self.model.board.grid[indexes]!.x, y: self.model.board.grid[indexes]!.y)
                 
                 piece.view.center = piece.center
+                
+                self.nextPiece = Piece()
+                self.model.nextPiece = Piece()
+                self.model.setupNextView()
+                
+                self.model.updateLabels()
+                
                 
 //                let transform = CGAffineTransform(scaleX: 2, y: 2)
 //
@@ -601,21 +608,7 @@ extension ViewController: ModelDelegate {
                 
                 
                 
-                nextPiece = Piece()
-                model.nextPiece = Piece()
-                model.setupNextView()
-                //            model.groupPiecesTogetherX()
-                //            model.addBoardGroups()
                 
-                //            for group in model.board.pieceGroups {
-                //
-                //                print("Group ID = \(group.id)")
-                //                print("Group Count = \(group.pieces.count)")
-                //
-                //
-                //            }
-                
-                model.updateLabels()
             }
         }
     }
