@@ -56,6 +56,7 @@ protocol ModelDelegate {
     func groupTogether(view: UIView, side: String, color: UIColor)
     func setCounterLabel()
     func updateCounterLabel(num: Int)
+    func shakeBoard()
 }
 
 class Model {
@@ -386,7 +387,7 @@ class Model {
                 
                 //TODO: Make animation - Shake board
                 
-                
+                delegate?.shakeBoard()
                 
                 resetPieces()
                 groupsThatHaveMovedBack.removeAll()

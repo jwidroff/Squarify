@@ -278,6 +278,46 @@ class ViewController: UIViewController {
 
 extension ViewController: ModelDelegate {
     
+    func shakeBoard() {
+        
+        let originalCenter = CGPoint(x: self.boardView.frame.midX, y: self.boardView.frame.midY)
+        
+//        UIView.animate(withDuration: 0.25) {
+//
+//
+//
+//
+//
+//        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7) {
+            
+            self.boardView.center = CGPoint(x: self.boardView.frame.midX + 20.0, y: self.boardView.frame.midY)
+            
+            
+        } completion: { (true) in
+            
+            
+            
+            
+            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0) {
+                
+                self.boardView.center = CGPoint(x: self.boardView.frame.midX - 40.0, y: self.boardView.frame.midY)
+                
+                
+            } completion: { (true) in
+                
+                self.boardView.center = originalCenter
+                
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    
     func updateCounterLabel(num: Int) {
         
         counterLabel.text = "\(num)"
@@ -296,7 +336,7 @@ extension ViewController: ModelDelegate {
         
         let rect = CGRect(x: x, y: y, width: width, height: height)
         counterLabel = UILabel(frame: rect)
-        counterLabel.backgroundColor = UIColor.blue //MARK: Change to clear
+        counterLabel.backgroundColor = UIColor.clear //MARK: Change to clear
         counterLabel.text = "0"
         counterLabel.textAlignment = .center
 //        let size = CGSize(width: 150.0, height: 150.0)
