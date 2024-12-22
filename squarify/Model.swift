@@ -28,14 +28,11 @@ import UIKit
 //TODO: Put the nextPiece in the center of the board
 
 
-//MARK: 1) adding a piece needs to happen before the find4square func
 
-// Make chain for connected pieces
 //Make counter for number of swippes
 //Make a high score for most swipes
 //Make a soundtrack
 // No pieces should be added if no pieces actually moved
-// Change the groupnumber of the 1st piece to zero
 
 protocol ModelDelegate {
     func setUpGameViews(board: Board)
@@ -261,45 +258,45 @@ class Model {
         return piece
     }
     
-    func movePiecesHelper(piece: Piece, direction: Direction) {
-        
-        if let indexes = piece.indexes {
-            
-            switch direction {
-                
-            case .up:
-                
-                    if indexes.y != 0 {
-                        piece.indexes?.y = (indexes.y)! - 1
-                        piecesMoved = true
-                    }
-                
-            case .down:
-                
-                    if indexes.y != board.heightSpaces - 1 {
-                        piece.indexes?.y = indexes.y! + 1
-                        piecesMoved = true
-                    }
-                
-            case .left:
-                
-                    if indexes.x != 0 {
-                        piece.indexes?.x = indexes.x! - 1
-                        piecesMoved = true
-                    }
-                
-            case .right:
-                
-                    if indexes.x != board.widthSpaces - 1 {
-                        piece.indexes?.x = indexes.x! + 1
-                        piecesMoved = true
-                    }
-                    
-            default:
-                break
-            }
-        }
-    }
+//    func movePiecesHelper(piece: Piece, direction: Direction) {
+//
+//        if let indexes = piece.indexes {
+//
+//            switch direction {
+//
+//            case .up:
+//
+//                    if indexes.y != 0 {
+//                        piece.indexes?.y = (indexes.y)! - 1
+//                        piecesMoved = true
+//                    }
+//
+//            case .down:
+//
+//                    if indexes.y != board.heightSpaces - 1 {
+//                        piece.indexes?.y = indexes.y! + 1
+//                        piecesMoved = true
+//                    }
+//
+//            case .left:
+//
+//                    if indexes.x != 0 {
+//                        piece.indexes?.x = indexes.x! - 1
+//                        piecesMoved = true
+//                    }
+//
+//            case .right:
+//
+//                    if indexes.x != board.widthSpaces - 1 {
+//                        piece.indexes?.x = indexes.x! + 1
+//                        piecesMoved = true
+//                    }
+//
+//            default:
+//                break
+//            }
+//        }
+//    }
     
     func pieceIsPartOfAGroup(piece: Piece, groups: [Group]) -> Bool {
         
@@ -343,6 +340,9 @@ class Model {
 //            if piecesMoved == true {
                 
 //                piecesMoved = false
+            
+            if piecesMoved == true {
+                
                 setNextPiece() {
                     
 
@@ -376,6 +376,24 @@ class Model {
                     
                 }
                 
+            } else {
+                
+                //Nothing was able to move
+                
+                //TODO: Make animation - Shake board
+                
+                
+                resetPieces()
+                groupsThatHaveMovedBack.removeAll()
+                groups2Return.removeAll()
+                board.locationAndIDs.removeAll() //MARK: NEEDED
+                piecesToMoveBack.removeAll()
+                groupsThatHaveMoved.removeAll()
+                delegate?.enableGestures()
+            }
+            
+
+                
 //            }
             
             
@@ -385,7 +403,9 @@ class Model {
         }
         
         
-        
+        piecesMoved = false
+//        delegate?.enableGestures()
+
         
         
     }
@@ -458,6 +478,7 @@ class Model {
         completion()
     }
     
+    
     func movePieces(direction: Direction, completion: () -> Void?) {
         
         setPieceCanMove(direction: direction)
@@ -469,6 +490,7 @@ class Model {
 //        printVisualDisplay(type: "pieceID")
         
         if piecesMovedX == true {
+            
             movePieces(direction: direction){}
             piecesMoved = true
         }
@@ -1030,51 +1052,51 @@ class Model {
         return boolToReturn
     }
    
-    func moveAllGrpPcs(group: Group, direction: Direction) {
-        
-        switch direction{
-            
-        case .up:
-            
-            for piece in group.pieces.sorted(by: { (piece1, piece2) in
-                piece1.indexes!.y! < piece2.indexes!.y!
-            }) {
-                movePiecesHelper(piece: piece, direction: direction)
-                self.delegate?.movePieceView(piece: piece)
-            }
-            
-        case .down:
-            
-            for piece in group.pieces.sorted(by: { (piece1, piece2) in
-                piece1.indexes!.y! > piece2.indexes!.y!
-            }) {
-                movePiecesHelper(piece: piece, direction: direction)
-                self.delegate?.movePieceView(piece: piece)
-            }
-            
-        case .left:
-            
-            for piece in group.pieces.sorted(by: { (piece1, piece2) in
-                piece1.indexes!.x! < piece2.indexes!.x!
-            }) {
-                movePiecesHelper(piece: piece, direction: direction)
-                self.delegate?.movePieceView(piece: piece)
-            }
-            
-        case .right:
-            
-            for piece in group.pieces.sorted(by: { (piece1, piece2) in
-                piece1.indexes!.x! > piece2.indexes!.x!
-            }) {
-                movePiecesHelper(piece: piece, direction: direction)
-                self.delegate?.movePieceView(piece: piece)
-            }
-            
-        default:
-            
-            break
-        }
-    }
+//    func moveAllGrpPcs(group: Group, direction: Direction) {
+//
+//        switch direction{
+//
+//        case .up:
+//
+//            for piece in group.pieces.sorted(by: { (piece1, piece2) in
+//                piece1.indexes!.y! < piece2.indexes!.y!
+//            }) {
+//                movePiecesHelper(piece: piece, direction: direction)
+//                self.delegate?.movePieceView(piece: piece)
+//            }
+//
+//        case .down:
+//
+//            for piece in group.pieces.sorted(by: { (piece1, piece2) in
+//                piece1.indexes!.y! > piece2.indexes!.y!
+//            }) {
+//                movePiecesHelper(piece: piece, direction: direction)
+//                self.delegate?.movePieceView(piece: piece)
+//            }
+//
+//        case .left:
+//
+//            for piece in group.pieces.sorted(by: { (piece1, piece2) in
+//                piece1.indexes!.x! < piece2.indexes!.x!
+//            }) {
+//                movePiecesHelper(piece: piece, direction: direction)
+//                self.delegate?.movePieceView(piece: piece)
+//            }
+//
+//        case .right:
+//
+//            for piece in group.pieces.sorted(by: { (piece1, piece2) in
+//                piece1.indexes!.x! > piece2.indexes!.x!
+//            }) {
+//                movePiecesHelper(piece: piece, direction: direction)
+//                self.delegate?.movePieceView(piece: piece)
+//            }
+//
+//        default:
+//
+//            break
+//        }
+//    }
     
     func returnGroup(groupNumber: Int) -> Group {
         
@@ -1230,14 +1252,19 @@ class Model {
  
     func updateLabels() {
         
-        for group in board.pieceGroups {
-            
-            for piece in group.pieces {
-                
-                piece.view.label.font = UIFont.boldSystemFont(ofSize: 8.0)
-                piece.view.label.text = "\(piece.id)"
-            }
-        }
+        //MARK: Add label on to main screen and increase by 1 for each swipe
+        
+        
+        
+        
+//        for group in board.pieceGroups {
+//
+//            for piece in group.pieces {
+//
+//                piece.view.label.font = UIFont.boldSystemFont(ofSize: 8.0)
+//                piece.view.label.text = "\(piece.id)"
+//            }
+//        }
     }
     
     func animation4GroupingPieces(pieces: [Piece]) {
