@@ -55,6 +55,7 @@ protocol ModelDelegate {
     func enableGestures()
     func groupTogether(view: UIView, side: String, color: UIColor)
     func setCounterLabel()
+    func updateCounterLabel(num: Int)
 }
 
 class Model {
@@ -83,6 +84,7 @@ class Model {
     var blockeeAndBlockers = [Int: [Int]]()
     var highestID = 0
     var masterGroupOfGroupsX = [[Int]]()
+    var swipes = 0
 
     
     init(){
@@ -385,6 +387,7 @@ class Model {
                 //TODO: Make animation - Shake board
                 
                 
+                
                 resetPieces()
                 groupsThatHaveMovedBack.removeAll()
                 groups2Return.removeAll()
@@ -483,6 +486,13 @@ class Model {
     
     func movePieces(direction: Direction, completion: () -> Void?) {
         
+        movePiecesHelper(direction: direction)
+        
+        completion()
+    }
+    
+    func movePiecesHelper(direction: Direction) {
+        
         setPieceCanMove(direction: direction)
         
 //        printVisualDisplay(type: "pieceID")
@@ -493,12 +503,13 @@ class Model {
         
         if piecesMovedX == true {
             
-            movePieces(direction: direction){}
+            movePiecesHelper(direction: direction)
             piecesMoved = true
         }
         
-        completion()
+        
     }
+    
     
     var groupIDMax = 0
     
@@ -1255,6 +1266,12 @@ class Model {
     func updateLabels() {
         
         //MARK: Add label on to main screen and increase by 1 for each swipe
+        
+        print("UPDATE LABELS CALLED")
+        
+        
+        swipes += 1
+        delegate?.updateCounterLabel(num: swipes)
         
         
         

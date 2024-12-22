@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     var instructionsShown = false
     var nextPiece = Piece()
     var counterLabel = UILabel()
-    var swipes = 0
+//    var swipes = 0
     
     var recognizer = UISwipeGestureRecognizer()
     
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         model.delegate = self
         model.board.view.removeFromSuperview()
         model.setUpGame()
-        model.updateLabels()
+//        model.updateLabels()
         model.setUpControlsAndInstructions()
     }
     
@@ -278,6 +278,13 @@ class ViewController: UIViewController {
 
 extension ViewController: ModelDelegate {
     
+    func updateCounterLabel(num: Int) {
+        
+        counterLabel.text = "\(num)"
+        
+        
+    }
+    
     
     func setCounterLabel() {
         
@@ -290,7 +297,7 @@ extension ViewController: ModelDelegate {
         let rect = CGRect(x: x, y: y, width: width, height: height)
         counterLabel = UILabel(frame: rect)
         counterLabel.backgroundColor = UIColor.blue //MARK: Change to clear
-        counterLabel.text = "\(swipes)"
+        counterLabel.text = "0"
         counterLabel.textAlignment = .center
 //        let size = CGSize(width: 150.0, height: 150.0)
 //        counterLabel.sizeThatFits(size)
@@ -619,7 +626,7 @@ extension ViewController: ModelDelegate {
                 self.model.nextPiece = Piece()
                 self.model.setupNextView()
                 
-                self.model.updateLabels()
+//                self.model.updateLabels()
                 
                 
 //                let transform = CGAffineTransform(scaleX: 2, y: 2)
