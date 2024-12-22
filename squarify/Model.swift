@@ -54,6 +54,7 @@ protocol ModelDelegate {
     func disableGestures()
     func enableGestures()
     func groupTogether(view: UIView, side: String, color: UIColor)
+    func setCounterLabel()
 }
 
 class Model {
@@ -92,7 +93,7 @@ class Model {
         
         setLevel()
         setBoard()
-        groupPiecesTogether(){}
+//        groupPiecesTogether(){}
     }
     
     func setUpControlsAndInstructions() {
@@ -100,6 +101,7 @@ class Model {
         delegate?.setUpControlViews()
 //        setupInstructions()
         setupNextView()
+        delegate?.setCounterLabel()
     }
     
     func setLevel() {

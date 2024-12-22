@@ -26,6 +26,8 @@ class ViewController: UIViewController {
     var topBarView = UIView()
     var instructionsShown = false
     var nextPiece = Piece()
+    var counterLabel = UILabel()
+    var swipes = 0
     
     var recognizer = UISwipeGestureRecognizer()
     
@@ -139,7 +141,10 @@ class ViewController: UIViewController {
         setupTopBar()
         setupRetryButton()
         setupMenuButton()
+//        setCounterLabel()
     }
+    
+    
     
     func setupTopBar() {
         
@@ -272,6 +277,29 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ModelDelegate {
+    
+    
+    func setCounterLabel() {
+        
+        let width = pieceWidth * 2
+        let height = pieceHeight
+        let x = (boardWidth / 2) - (width / 2)
+        let y = view.frame.midY / 4
+        
+        
+        let rect = CGRect(x: x, y: y, width: width, height: height)
+        counterLabel = UILabel(frame: rect)
+        counterLabel.backgroundColor = UIColor.blue //MARK: Change to clear
+        counterLabel.text = "\(swipes)"
+        counterLabel.textAlignment = .center
+//        let size = CGSize(width: 150.0, height: 150.0)
+//        counterLabel.sizeThatFits(size)
+        counterLabel.font = UIFont.boldSystemFont(ofSize: pieceHeight / 1.5)
+//        counterLabel.adjustsFontSizeToFitWidth
+        view.addSubview(counterLabel)
+        
+    }
+    
     
     func enableGestures() {
         
@@ -765,6 +793,7 @@ extension ViewController: ModelDelegate {
         self.setSizes(board: board)
         self.setupGrid()
         self.setupBoard(board: board)
+//        g
     }
     
     func setUpNextView(nextPiece: Piece) {
