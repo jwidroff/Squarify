@@ -16,7 +16,8 @@ class Piece {
     var previousIndex: Indexes?
     var blockedByWall = false
     var view = ShapeView()
-    var color = UIColor()
+    var color: ColorX?
+    var shade = 1
     var center = CGPoint()
     var groupNumber = Int()
     var id = Int()
@@ -28,7 +29,7 @@ class Piece {
         
     }
     
-    init(indexes: Indexes?, color: UIColor) {
+    init(indexes: Indexes?, color: ColorX) {
         
         
         

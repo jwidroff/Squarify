@@ -13,7 +13,7 @@ class ShapeView : UIView {
     
 //    var colors = [CGColor]()
     var context : CGContext?
-    var color = UIColor()
+    var color: ColorX?
     var label = UILabel()
     
     private var colorTheme = ColorTheme()
@@ -30,7 +30,9 @@ class ShapeView : UIView {
 
         super.init(frame: frame)
         color = piece.color
-        self.backgroundColor = color
+        var bgColor = ColorShade(color: color!, shade: piece.shade).returnColor()
+        
+        self.backgroundColor = bgColor
 //        makeSoft()
 //        addLabel()
 //        setViewForGroups(piece: piece, groups: groups)
@@ -53,16 +55,16 @@ class ShapeView : UIView {
 
     }
     
-    func changeColor(color: UIColor) {
-        
-//        self.draw(frame)
-
-        self.color = color
-        self.backgroundColor = color
-//        setNeedsLayout()
-//        setNeedsDisplay()
-        
-    }
+//    func changeColor(color: UIColor) {
+//
+////        self.draw(frame)
+//
+//        self.color = color
+//        self.backgroundColor = color
+////        setNeedsLayout()
+////        setNeedsDisplay()
+//
+//    }
     
     func setViewForGroups(piece: Piece, groups: [Group]?) {
         
@@ -272,57 +274,57 @@ class ShapeView : UIView {
         }
     }
     
-    func makeSoft() {
-        
-        self.layer.masksToBounds = false
-        let frame = self.bounds
-        
-        let shadowRadius: CGFloat = 1
-        
-        //Right border
-        let darkShadow = CALayer()
-        darkShadow.frame = frame
-        darkShadow.backgroundColor = color.cgColor
-        darkShadow.shadowColor = UIColor.black.cgColor
-        darkShadow.shadowOffset = CGSize(width: shadowRadius, height: 0)
-        darkShadow.shadowOpacity = 1
-        darkShadow.shadowRadius = shadowRadius
-        self.layer.insertSublayer(darkShadow, at: 0)
-
-        //Bottom border
-        let darkShadow2 = CALayer()
-        darkShadow2.frame = frame
-        darkShadow2.backgroundColor = color.cgColor
-        darkShadow2.shadowColor = UIColor.black.cgColor
-        darkShadow2.shadowOffset = CGSize(width: 0, height: shadowRadius)
-        darkShadow2.shadowOpacity = 1
-        darkShadow2.shadowRadius = shadowRadius
-        self.layer.insertSublayer(darkShadow2, at: 1)
-        
-        //Left border
-        let lightShadow = CALayer()
-        lightShadow.frame = frame
-        lightShadow.backgroundColor = color.cgColor
-        lightShadow.shadowColor = UIColor.white.cgColor
-        lightShadow.shadowOffset = CGSize(width: -shadowRadius, height: 0)
-        lightShadow.shadowOpacity = 1
-        lightShadow.shadowRadius = shadowRadius
-        self.layer.insertSublayer(lightShadow, at: 2)
-        
-        //Top border
-        let lightShadow2 = CALayer()
-        lightShadow2.frame = frame
-        lightShadow2.backgroundColor = color.cgColor
-        lightShadow2.shadowColor = UIColor.white.cgColor
-        lightShadow2.shadowOffset = CGSize(width: 0, height: -shadowRadius)
-        lightShadow2.shadowOpacity = 1
-        lightShadow2.shadowRadius = shadowRadius
-        self.layer.insertSublayer(lightShadow2, at: 3)
-        
-        
-        
-        
-    }
+//    func makeSoft() {
+//
+//        self.layer.masksToBounds = false
+//        let frame = self.bounds
+//
+//        let shadowRadius: CGFloat = 1
+//
+//        //Right border
+//        let darkShadow = CALayer()
+//        darkShadow.frame = frame
+//        darkShadow.backgroundColor = color.cgColor
+//        darkShadow.shadowColor = UIColor.black.cgColor
+//        darkShadow.shadowOffset = CGSize(width: shadowRadius, height: 0)
+//        darkShadow.shadowOpacity = 1
+//        darkShadow.shadowRadius = shadowRadius
+//        self.layer.insertSublayer(darkShadow, at: 0)
+//
+//        //Bottom border
+//        let darkShadow2 = CALayer()
+//        darkShadow2.frame = frame
+//        darkShadow2.backgroundColor = color.cgColor
+//        darkShadow2.shadowColor = UIColor.black.cgColor
+//        darkShadow2.shadowOffset = CGSize(width: 0, height: shadowRadius)
+//        darkShadow2.shadowOpacity = 1
+//        darkShadow2.shadowRadius = shadowRadius
+//        self.layer.insertSublayer(darkShadow2, at: 1)
+//
+//        //Left border
+//        let lightShadow = CALayer()
+//        lightShadow.frame = frame
+//        lightShadow.backgroundColor = color.cgColor
+//        lightShadow.shadowColor = UIColor.white.cgColor
+//        lightShadow.shadowOffset = CGSize(width: -shadowRadius, height: 0)
+//        lightShadow.shadowOpacity = 1
+//        lightShadow.shadowRadius = shadowRadius
+//        self.layer.insertSublayer(lightShadow, at: 2)
+//
+//        //Top border
+//        let lightShadow2 = CALayer()
+//        lightShadow2.frame = frame
+//        lightShadow2.backgroundColor = color.cgColor
+//        lightShadow2.shadowColor = UIColor.white.cgColor
+//        lightShadow2.shadowOffset = CGSize(width: 0, height: -shadowRadius)
+//        lightShadow2.shadowOpacity = 1
+//        lightShadow2.shadowRadius = shadowRadius
+//        self.layer.insertSublayer(lightShadow2, at: 3)
+//
+//
+//
+//
+//    }
 }
 
 

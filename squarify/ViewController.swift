@@ -372,7 +372,7 @@ extension ViewController: ModelDelegate {
         counterLabel.textAlignment = .center
 //        let size = CGSize(width: 150.0, height: 150.0)
 //        counterLabel.sizeThatFits(size)
-        counterLabel.font = UIFont.boldSystemFont(ofSize: pieceHeight / 1.5)
+        counterLabel.font = UIFont.boldSystemFont(ofSize: pieceHeight / 1.25)
 //        counterLabel.adjustsFontSizeToFitWidth
         view.addSubview(counterLabel)
         

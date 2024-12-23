@@ -77,12 +77,12 @@ class Model {
     var groupsThatHaveMovedBack = [Int]()
     var piecesToMoveBack = [Int]()
 
-    var red = PieceColors().colors["red"]!
-    var blue = PieceColors().colors["blue"]!
-    var green = PieceColors().colors["green"]!
-    var purple = PieceColors().colors["purple"]!
-    var yellow = PieceColors().colors["yellow"]!
-    var orange = PieceColors().colors["orange"]!
+//    var red = PieceColors().colors["red"]!
+//    var blue = PieceColors().colors["blue"]!
+//    var green = PieceColors().colors["green"]!
+//    var purple = PieceColors().colors["purple"]!
+//    var yellow = PieceColors().colors["yellow"]!
+//    var orange = PieceColors().colors["orange"]!
     var groupCount = 0
     var nextPiece = Piece()
 //    var groups2Rerun = [[Group]]()
@@ -117,7 +117,7 @@ class Model {
         board.heightSpaces = 6
         board.widthSpaces = 6
         
-        let piece100 = Piece(indexes: Indexes(x: 0, y: 0), color: red)
+        let piece100 = Piece(indexes: Indexes(x: 0, y: 0), color: ColorX.red)
         let group100 = Group(pieces: [piece100])//, piece21, piece20, piece23, piece24, piece25])
         group100.id = 0
         
@@ -176,15 +176,17 @@ class Model {
         delegate?.setUpNextView(nextPiece: nextPiece)
     }
     
-    func returnRandomColor() -> UIColor {
+    func returnRandomColor() -> ColorX {
         
-        var color2Return = UIColor()
-        let colors = PieceColors()
-        let pieceColors = colors.colors
-        let randomColors = ["red","blue","green"]//,"purple"]//, "yellow", "orange"]//, "lightBlue", "teal", "purp"]
+        var color2Return: ColorX?
+//        let colors = PieceColors()
+//        let pieceColors = colors.colors
+        
+        
+        let randomColors = [ColorX.red, ColorX.blue, ColorX.green]//,"purple"]//, "yellow", "orange"]//, "lightBlue", "teal", "purp"]
         let randomIndex = arc4random_uniform(UInt32(randomColors.count))
-        color2Return = pieceColors[randomColors[Int(randomIndex)]]!
-        return color2Return
+        color2Return = randomColors[Int(randomIndex)]
+        return color2Return!
     }
 
     func setPieceID(piece: Piece) {
