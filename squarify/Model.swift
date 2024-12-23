@@ -11,28 +11,33 @@ import UIKit
 
 //TODO: 3 ways to make pieces disappear: 1) Line across the board 2) 7 pieces grouped 3) a group that surrounds pieces
 
-//TODO: Make it that if no pieces can move, the board shakes and nothing happens
-
-
-//TODO: Make it that if no pieces move on a swipe, no piece is added
 
 //TODO: Make initial text of the game the first time its played say "Swipe in any direction"
 
-//TODO: New issue - When a piece is trapped in another group of pieces, when you swipe in any direction it doesnt move because of the fact that the middle piece cant move (although this may be able to be fixed by the fact that all of those pieces will have been removed anyway
 
-//TODO: Issue regarding the grouping of the pieces together still doesnt seem to be fixed
-
-//TODO: When groups are intertwined, the groups dont seem to move properly. need to perhaps consider identifying these circumstances and then considering them to be one group for that one move and see if all of the pieces can move together (like a "C" shaped pieces around a part thats sticking out from a group of pieces)
+//TODO: Make a high score for most swipes
 
 
-//TODO: Put the nextPiece in the center of the board
+//TODO: Make a soundtrack
 
 
 
-//Make counter for number of swippes
-//Make a high score for most swipes
-//Make a soundtrack
-// No pieces should be added if no pieces actually moved
+// TODO: Need to make it that the next piece cant be the color of one color because if there are only red pieces and then a red comes out and makes a 4sq, there will be no pieces left
+
+//TODO: Make it that if there is a box of the same color, it will take out all colors inside of it if it's a lower class. I.e. A dark red box can take out lighter green pieces but it cant take out green pieces that are the same shade
+
+//TODO: Make a dictionary of the pieces colors with the different levels -  piece.shade = "x"
+
+
+//TODO: Show line of pieces that make the square and animate it.
+
+
+//TODO: When pieces are removed, they should move into the center of the 4 pieces that make the 4sq and turn into a draker shade of that color
+
+
+
+
+
 
 protocol ModelDelegate {
     func setUpGameViews(board: Board)
@@ -56,7 +61,7 @@ protocol ModelDelegate {
     func groupTogether(view: UIView, side: String, color: UIColor)
     func setCounterLabel()
     func updateCounterLabel(num: Int)
-    func shakeBoard()
+    func shakeBoard(direction: Direction)
 }
 
 class Model {
@@ -387,7 +392,7 @@ class Model {
                 
                 //TODO: Make animation - Shake board
                 
-                delegate?.shakeBoard()
+                delegate?.shakeBoard(direction: direction)
                 
                 resetPieces()
                 groupsThatHaveMovedBack.removeAll()

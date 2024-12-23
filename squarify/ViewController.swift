@@ -278,40 +278,71 @@ class ViewController: UIViewController {
 
 extension ViewController: ModelDelegate {
     
-    func shakeBoard() {
+    func shakeBoard(direction: Direction) {
+        
         
         let originalCenter = CGPoint(x: self.boardView.frame.midX, y: self.boardView.frame.midY)
         
-//        UIView.animate(withDuration: 0.25) {
-//
-//
-//
-//
-//
-//        }
         
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7) {
+        switch direction {
             
-            self.boardView.center = CGPoint(x: self.boardView.frame.midX + 20.0, y: self.boardView.frame.midY)
+        case .up, .down:
             
-            
-        } completion: { (true) in
-            
-            
-            
-            
-            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0) {
+            UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.5) {
                 
-                self.boardView.center = CGPoint(x: self.boardView.frame.midX - 40.0, y: self.boardView.frame.midY)
+                self.boardView.center = CGPoint(x: self.boardView.frame.midX, y: self.boardView.frame.midY + 20.0)
                 
                 
             } completion: { (true) in
-                
-                self.boardView.center = originalCenter
+
+                UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0) {
+                    
+                    self.boardView.center = CGPoint(x: self.boardView.frame.midX, y: self.boardView.frame.midY - 40.0)
+                    
+                    
+                } completion: { (true) in
+                    
+                    self.boardView.center = originalCenter
+                    
+                }
                 
             }
             
+        case .left, .right:
+            
+            UIView.animate(withDuration: 0.10, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.5) {
+                
+                self.boardView.center = CGPoint(x: self.boardView.frame.midX + 20.0, y: self.boardView.frame.midY)
+                
+                
+            } completion: { (true) in
+
+                UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0) {
+                    
+                    self.boardView.center = CGPoint(x: self.boardView.frame.midX - 40.0, y: self.boardView.frame.midY)
+                    
+                    
+                } completion: { (true) in
+                    
+                    self.boardView.center = originalCenter
+                    
+                }
+                
+            }
+            
+        default:
+            
+            
+            break
+            
+            
+            
+            
         }
+        
+        
+
+        
         
         
         
