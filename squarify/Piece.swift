@@ -17,7 +17,7 @@ class Piece {
     var blockedByWall = false
     var view = ShapeView()
     var color: ColorX?
-    var shade = 1
+    var shade = 2
     var center = CGPoint()
     var groupNumber = Int()
     var id = Int()

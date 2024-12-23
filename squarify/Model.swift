@@ -35,6 +35,8 @@ import UIKit
 //TODO: When pieces are removed, they should move into the center of the 4 pieces that make the 4sq and turn into a draker shade of that color
 
 
+//TODO: Make sure that when pieces have different shades, they arent grouped together
+
 
 
 

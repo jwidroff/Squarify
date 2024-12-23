@@ -59,7 +59,19 @@ class ColorShade {
         var colorToReturn = UIColor()
         
         //MARK: Working on this
-        let randomNum = CGFloat(Double(Double(arc4random_uniform(UInt32(0.3))) + 0.6))
+//        let randomNum = CGFloat(Double(Double(arc4random_uniform(UInt32(0.3))) + 0.6))
+        
+        
+        
+        let randomNum = Double(arc4random_uniform(6) + 3)
+//        let randomDecimal = Double(randomNum / 10)
+        let randomFloat = CGFloat(randomNum / 10)
+        
+
+        print("RANDOM num = \(randomNum)")
+//        print("RANDOM Dec = \(randomDecimal)")
+
+        print("RANDOM FLOAT = \(randomFloat)")
         
         switch color {
             
@@ -67,17 +79,57 @@ class ColorShade {
             
         case .red:
             
-            colorToReturn = UIColor.init(red: 0.8, green: 0.1, blue: 0.1, alpha: randomNum)
+            
+            
+            switch shade{
+                
+            case 1:
+                colorToReturn = UIColor.init(red: 0.8, green: 0.1, blue: 0.1, alpha: 0.3)
+            case 2:
+                colorToReturn = UIColor.init(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0)
+
+            default:
+                
+                break
+                
+            }
             
             
         case .blue:
             
-            colorToReturn = UIColor.init(red: 0.0, green: 0.1, blue: 0.9, alpha: randomNum)
+            switch shade{
+                
+            case 1:
+                colorToReturn = UIColor.init(red: 0.0, green: 0.1, blue: 0.9, alpha: 0.3)
+            case 2:
+                colorToReturn = UIColor.init(red: 0.0, green: 0.1, blue: 0.9, alpha: 1.0)
+                
+            default:
+                break
+                
+            }
             
             
         case .green:
             
-            colorToReturn = UIColor.init(red: 0.0, green: 0.8, blue: 0.5, alpha: randomNum)
+            switch shade {
+                
+                
+            case 1:
+                colorToReturn = UIColor.init(red: 0.0, green: 0.8, blue: 0.5, alpha: 0.3)
+                
+            case 2:
+                colorToReturn = UIColor.init(red: 0.0, green: 0.8, blue: 0.5, alpha: 1.0)
+                
+
+            default:
+                break
+            }
+            
+            
+                
+                
+            
             
         default:
             

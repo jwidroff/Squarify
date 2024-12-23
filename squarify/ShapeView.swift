@@ -30,7 +30,7 @@ class ShapeView : UIView {
 
         super.init(frame: frame)
         color = piece.color
-        var bgColor = ColorShade(color: color!, shade: piece.shade).returnColor()
+        let bgColor = ColorShade(color: color!, shade: piece.shade).returnColor()
         
         self.backgroundColor = bgColor
 //        makeSoft()
