@@ -343,52 +343,40 @@ class Model {
         
         delegate?.disableGestures()
         
-        
         sortPieces(direction: direction)
-        
-//        printVisualDisplay(type: "pieceID")
         
         movePieces(direction: direction) {
             
-//            printVisualDisplay(type: "pieceID")
-
-//            if piecesMoved == true {
-                
-//                piecesMoved = false
-            
             if piecesMoved == true {
                 
-                setNextPiece() {
-                    
-
-//                    delegate?.setUpNextView(nextPiece: nextPiece)
                     groupPiecesTogether() {
                         
                         updateLabels()
                         
-                        
-                        
                         find4Square() {
                             
-                            updateBoard()
-                            printVisualDisplay(type: "groupID")
-                            
-                            
-                            resetPieces()
-                            groupsThatHaveMovedBack.removeAll()
-                            groups2Return.removeAll()
-                            board.locationAndIDs.removeAll() //MARK: NEEDED
-                            piecesToMoveBack.removeAll()
-                            groupsThatHaveMoved.removeAll()
-                            delegate?.enableGestures()
+                            setNextPiece() {
+                                
+                                groupPiecesTogether {
+                                    
+                                    find4Square {
+                                        
+                                        updateBoard()
+                                        printVisualDisplay(type: "groupID")
+                                        
+                                        
+                                        resetPieces()
+                                        groupsThatHaveMovedBack.removeAll()
+                                        groups2Return.removeAll()
+                                        board.locationAndIDs.removeAll() //MARK: NEEDED
+                                        piecesToMoveBack.removeAll()
+                                        groupsThatHaveMoved.removeAll()
+                                        delegate?.enableGestures()
+                                        
+                                    }
+                                }
                         }
-                        
-                        
-                        
                     }
-                    
-                    
-                    
                 }
                 
             } else {
@@ -407,23 +395,10 @@ class Model {
                 groupsThatHaveMoved.removeAll()
                 delegate?.enableGestures()
             }
-            
-
-                
-//            }
-            
-            
- 
-            
-            
         }
         
-        
         piecesMoved = false
-//        delegate?.enableGestures()
 
-        
-        
     }
 
     func find4Square(completion: () -> Void?) {

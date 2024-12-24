@@ -779,8 +779,8 @@ extension ViewController: ModelDelegate {
 //                    piece.view.transform = transform
                     
 //                    self.model.nextPiece = Piece(indexes: Indexes(x: nil, y: nil), color: self.model.returnRandomColor())
-//                    
-//                    
+//
+//
 //                    self.setUpNextView(nextPiece: self.model.nextPiece)
                     
                     
