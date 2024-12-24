@@ -58,21 +58,11 @@ class ColorShade {
         
         var colorToReturn = UIColor()
         
-        //MARK: Working on this
-//        let randomNum = CGFloat(Double(Double(arc4random_uniform(UInt32(0.3))) + 0.6))
-        
-        
-        
-        let randomNum = Double(arc4random_uniform(6) + 3)
-//        let randomDecimal = Double(randomNum / 10)
-        let randomFloat = CGFloat(randomNum / 10)
-        
-
-        print("RANDOM num = \(randomNum)")
-//        print("RANDOM Dec = \(randomDecimal)")
-
-        print("RANDOM FLOAT = \(randomFloat)")
-        
+//        let randomNum = Double(arc4random_uniform(6) + 3)
+//        let randomFloat = CGFloat(randomNum / 10)
+//        print("RANDOM num = \(randomNum)")
+//        print("RANDOM FLOAT = \(randomFloat)")
+//
         switch color {
             
             

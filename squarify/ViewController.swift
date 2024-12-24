@@ -675,6 +675,72 @@ extension ViewController: ModelDelegate {
         
     }
     
+    
+    func addPieceToBoard(piece: Piece) {
+        
+        if let indexes = piece.indexes {
+            
+            
+            print("Yes.........")
+//            piece.view = self.nextPiece.view
+            
+            
+//            self.nextPiece.view.removeFromSuperview()
+            
+            piece.center = CGPoint(x: self.model.board.grid[indexes]!.x, y: self.model.board.grid[indexes]!.y)
+            
+            let center = CGPoint(x: (self.boardWidth / 2) - (self.pieceWidth / 2), y: 500)
+        
+        var frame = CGRect(x: center.x, y: center.y, width: self.pieceWidth, height: self.pieceHeight)
+        
+        piece.view = ShapeView(frame: frame, piece: piece, groups: self.model.board.pieceGroups)
+        
+        
+            piece.view.center = piece.center
+            
+        
+            
+            
+            
+            
+            UIView.animate(withDuration: 0.25, delay: 0.00, options: .curveEaseIn) {
+                
+                //            if let indexes = piece.indexes {
+                
+                
+                self.model.board.view.addSubview(piece.view)
+                
+//                self.nextPiece = Piece()
+//                self.model.nextPiece = Piece()
+//                self.model.setupNextView()
+                
+//                self.model.updateLabels()
+                
+                
+//                let transform = CGAffineTransform(scaleX: 2, y: 2)
+//
+//                piece.view.transform = transform
+                //            }
+            } completion: { [self] (true) in
+//
+//                UIView.animate(withDuration: 0.25) {
+////                    let transform = CGAffineTransform(scaleX: 1, y: 1)
+////
+////                    piece.view.transform = transform
+//                }
+//
+//
+//
+//
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    
     func moveNextPieceOnToBoard(piece: Piece) {
 
         if let indexes = piece.indexes {

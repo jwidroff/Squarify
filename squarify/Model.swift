@@ -38,7 +38,7 @@ import UIKit
 //TODO: Make sure that when pieces have different shades, they arent grouped together
 
 
-
+//TODO: NEW ISSUE THAT MUST BE FIXED. WHEN 2 pieces get added to a group at the same time (I.e. 3 groups combining at the same time) it causes an issue b/c one of the pieces groups may be diff from the others. Need to test this and solve.
 
 
 protocol ModelDelegate {
@@ -64,6 +64,7 @@ protocol ModelDelegate {
     func setCounterLabel()
     func updateCounterLabel(num: Int)
     func shakeBoard(direction: Direction)
+    func addPieceToBoard(piece: Piece)
 }
 
 class Model {
@@ -370,7 +371,7 @@ class Model {
                         find4Square() {
                             
                             updateBoard()
-                            printVisualDisplay(type: "pieceID")
+                            printVisualDisplay(type: "groupID")
                             
                             
                             resetPieces()
@@ -487,6 +488,43 @@ class Model {
             }
         }
 
+        
+        //MARK: Try to make it that a new piece is added here
+        
+//        if piecesToDelete.isEmpty == false {
+//
+//
+//            let randomIndex = Int(arc4random_uniform(UInt32(Int(UInt32(piecesToDelete.count)))))
+//
+//            let randomPiece = piecesToDelete[randomIndex]
+//            let randomIndexes = randomPiece.indexes
+//            let newPiece = Piece(indexes: randomIndexes, color: randomPiece.color!)
+//
+////            let newPiece = Piece(indexes: randomIndexes, color: .red)
+//
+//            print(newPiece.view.frame.height)
+//            print(newPiece.view.frame.width)
+//            print(newPiece.view.frame.midX)
+//            print(newPiece.view.frame.midY)
+//
+//            newPiece.id = highestID + 1000
+////            highestID += 1
+//            
+//            let group = Group(pieces: [newPiece])
+//            group.id = groupIDMax + 1000
+//
+//            newPiece.groupNumber = group.id
+////            groupIDMax += 1
+//            board.pieces.append(newPiece)
+//            board.pieceGroups.append(group)
+//
+//            delegate?.addPieceToBoard(piece: newPiece)
+//
+//
+//        }
+        
+        
+        
         
         updateBoard()
         
@@ -810,7 +848,7 @@ class Model {
         
         switch type {
             
-        case "canMove":
+        case "groupID":
             
             for row in chart {
                 
@@ -820,12 +858,21 @@ class Model {
                     
                     if let pieceID = board.locationAndIDs[Indexes(x:indexesX.1 ,y:indexesX.0)] {
                         
-                        if returnPiecesFromID(id: pieceID).canMoveOneSpace == true {
-                            
-                            rowToPrint.append("Y")
-                        } else {
-                            rowToPrint.append("N")
-                        }
+                        let pieceXXX = returnPiecesFromID(id: pieceID)
+                        
+                        let groupID = pieceXXX.groupNumber
+                        
+                        rowToPrint.append("\(groupID)")
+                        
+                        
+                        
+                        
+//                        if returnPiecesFromID(id: pieceID).canMoveOneSpace == true {
+//
+//                            rowToPrint.append("Y")
+//                        } else {
+//                            rowToPrint.append("N")
+//                        }
                     } else {
                         rowToPrint.append(" ")
                     }
