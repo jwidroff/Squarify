@@ -361,7 +361,7 @@ class Model {
                 setNextPiece() {
                     
 
-                    
+//                    delegate?.setUpNextView(nextPiece: nextPiece)
                     groupPiecesTogether() {
                         
                         updateLabels()
@@ -509,7 +509,7 @@ class Model {
 //
 //            newPiece.id = highestID + 1000
 ////            highestID += 1
-//            
+//
 //            let group = Group(pieces: [newPiece])
 //            group.id = groupIDMax + 1000
 //
@@ -575,7 +575,11 @@ class Model {
         
         delegate?.moveNextPieceOnToBoard(piece: nextPiece)
         
-//        nextPiece = Piece()
+        
+        nextPiece = Piece(indexes: Indexes(x: nil, y: nil), color: returnRandomColor())
+        
+        delegate?.setUpNextView(nextPiece: nextPiece)
+        
 //        setupNextView()
             
         for piece in group.pieces {

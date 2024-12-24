@@ -25,8 +25,9 @@ class ViewController: UIViewController {
     var duration4Animation = 0.10
     var topBarView = UIView()
     var instructionsShown = false
-    var nextPiece = Piece()
+//    var nextPiece = Piece()
     var counterLabel = UILabel()
+    var nextPieceView = UIView()
 //    var swipes = 0
     
     var recognizer = UISwipeGestureRecognizer()
@@ -745,7 +746,7 @@ extension ViewController: ModelDelegate {
 
         if let indexes = piece.indexes {
             
-            piece.view = self.nextPiece.view
+            piece.view = self.nextPieceView as! ShapeView
             
             
 //            self.nextPiece.view.removeFromSuperview()
@@ -759,9 +760,9 @@ extension ViewController: ModelDelegate {
                 
                 piece.view.center = piece.center
                 
-                self.nextPiece = Piece()
-                self.model.nextPiece = Piece()
-                self.model.setupNextView()
+                self.nextPieceView = UIView()
+//                self.model.nextPiece = Piece()
+//                self.model.setupNextView()
                 
 //                self.model.updateLabels()
                 
@@ -776,6 +777,13 @@ extension ViewController: ModelDelegate {
 //                    let transform = CGAffineTransform(scaleX: 1, y: 1)
 //
 //                    piece.view.transform = transform
+                    
+//                    self.model.nextPiece = Piece(indexes: Indexes(x: nil, y: nil), color: self.model.returnRandomColor())
+//                    
+//                    
+//                    self.setUpNextView(nextPiece: self.model.nextPiece)
+                    
+                    
                 }
                 
                 
@@ -948,10 +956,22 @@ extension ViewController: ModelDelegate {
         let nextViewYFloat = (view.frame.midY)
         let nextViewXFloat = view.center.x - (nextViewWidth / 2)// - (pieceWidth / 2)
         let frame = CGRect(x: nextViewXFloat, y: nextViewYFloat, width: nextViewWidth, height: nextViewHeight)
-        nextPiece.view = ShapeView(frame: frame, piece: nextPiece, groups: nil)
+        nextPieceView = ShapeView(frame: frame, piece: nextPiece, groups: nil)
         
-        self.nextPiece = nextPiece
-        model.board.view.addSubview(self.nextPiece.view)
+//        self.nextPiece = nextPiece
+        
+        
+        UIView.animate(withDuration: 0.25, delay: 0.25, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0) {
+            
+            self.model.board.view.addSubview(self.nextPieceView)
+            
+//            self.boardView.addSubview(self.nextPieceView)
+
+            
+            
+        }
+        
+        
 //        makeSoft(view: self.nextPiece.view)
     }
     
