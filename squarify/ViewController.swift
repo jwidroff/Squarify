@@ -950,28 +950,44 @@ extension ViewController: ModelDelegate {
     
     func setUpNextView(nextPiece: Piece) {
         
+        //MARK: Need to make sure that this happens AFTER the original nextPiece goes onto the board.
+        
         let nextViewHeight = pieceHeight
         let nextViewWidth = pieceWidth
-//        let nextViewYFloat = view.center.y - (nextViewHeight / 2) - (pieceHeight / 2)
         let nextViewYFloat = (view.frame.midY)
         let nextViewXFloat = view.center.x - (nextViewWidth / 2)// - (pieceWidth / 2)
-        let frame = CGRect(x: nextViewXFloat, y: nextViewYFloat, width: nextViewWidth, height: nextViewHeight)
-        nextPieceView = ShapeView(frame: frame, piece: nextPiece, groups: nil)
         
+//        let nextViewXFloat = 0.0
+
+        let frame = CGRect(x: nextViewXFloat, y: nextViewYFloat, width: nextViewWidth, height: nextViewHeight)
+        
+        self.nextPieceView = ShapeView(frame: frame, piece: nextPiece, groups: nil)
+        self.model.board.view.addSubview(self.nextPieceView)
 //        self.nextPiece = nextPiece
         
-        
+        let transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        let transform2 = CGAffineTransform.identity
         UIView.animate(withDuration: 0.25, delay: 0.25, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0) {
             
-            self.model.board.view.addSubview(self.nextPieceView)
+//            self.nextPieceView.transform = transform
+            
+          
+//            self.nextPieceView.frame
+            
+           
             
 //            self.boardView.addSubview(self.nextPieceView)
 
             
             
+        }  completion: { [self] (true) in
+            
+            
+//            self.nextPieceView.transform = transform2
+
+            
+            
         }
-        
-        
 //        makeSoft(view: self.nextPiece.view)
     }
     
