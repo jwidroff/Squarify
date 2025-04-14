@@ -125,23 +125,28 @@ class Model {
         let group100 = Group(pieces: [piece100])//, piece21, piece20, piece23, piece24, piece25])
         group100.id = 0
         
-//        let piece101 = Piece(indexes: Indexes(x: 1, y: 2), color: ColorX.red)
-//        let group101 = Group(pieces: [piece101])//, piece21, piece20, piece23, piece24, piece25])
-//        group101.id = 101
-//
-//        let piece102 = Piece(indexes: Indexes(x: 1, y: 5), color: ColorX.red)
-//        let group102 = Group(pieces: [piece102])//, piece21, piece20, piece23, piece24, piece25])
-//        group102.id = 102
-//
-//        let piece103 = Piece(indexes: Indexes(x: 0, y: 1), color: ColorX.red)
-//        let group103 = Group(pieces: [piece103])//, piece21, piece20, piece23, piece24, piece25])
-//        group103.id = 103
-//
-//        let piece104 = Piece(indexes: Indexes(x: 1, y: 0), color: ColorX.red)
-//        let group104 = Group(pieces: [piece104])//, piece21, piece20, piece23, piece24, piece25])
-//        group104.id = 104
+        let piece101 = Piece(indexes: Indexes(x: 1, y: 2), color: ColorX.red)
+        let group101 = Group(pieces: [piece101])//, piece21, piece20, piece23, piece24, piece25])
+        group101.id = 101
+
+        let piece102 = Piece(indexes: Indexes(x: 1, y: 5), color: ColorX.red)
+        let group102 = Group(pieces: [piece102])//, piece21, piece20, piece23, piece24, piece25])
+        group102.id = 102
+
+        let piece103 = Piece(indexes: Indexes(x: 0, y: 1), color: ColorX.red)
+        let group103 = Group(pieces: [piece103])//, piece21, piece20, piece23, piece24, piece25])
+        group103.id = 103
+
+        let piece104 = Piece(indexes: Indexes(x: 1, y: 0), color: ColorX.red)
+        let group104 = Group(pieces: [piece104])//, piece21, piece20, piece23, piece24, piece25])
+        group104.id = 104
         
-        board.pieceGroups = [ group100]//, group104, group101]//, group4, group5, group3, group2, group6, group7, group8]
+        let piece105 = Piece(indexes: Indexes(x: 4, y: 0), color: ColorX.blue)
+        let group105 = Group(pieces: [piece105])//, piece21, piece20, piece23, piece24, piece25])
+        group105.id = 105
+        
+        
+        board.pieceGroups = [ group100, group101, group102, group103, group104, group105]
 
         var number = 0
         
@@ -358,11 +363,12 @@ class Model {
             if piecesMoved == true {
                 
                     groupPiecesTogether() {
-                        printVisualDisplay(type: "groupID")
+                        
+                        printVisualDisplay(type: "pieceID")
                         
                         updateLabels()
                         
-                        find4Square() {
+//                        find4Square() {
                             
                             setNextPiece() {
                                 
@@ -370,6 +376,21 @@ class Model {
                                     
                                     find4Square {
                                         
+//                                        for pieceD in pieces2Regroup {
+//                                            
+//                                            
+//                                            
+//                                            let group = Group(pieces: [pieceD])
+//                                            group.id = groupIDMax + 1
+//                                            groupIDMax += 1
+//                                            pieceD.groupNumber = group.id
+//                                            
+//                                            board.pieceGroups.append(group)
+//                                        }
+//                                        
+//                                        pieces2Regroup.removeAll()
+                                        
+//                                        groupPiecesTogether(){}
                                         updateBoard()
                                         printVisualDisplay(type: "groupID")
                                         
@@ -385,7 +406,7 @@ class Model {
                                     }
                                 }
                         }
-                    }
+//                    }
                 }
                 
             } else {
@@ -410,6 +431,10 @@ class Model {
 
     }
 
+    var pieces2Regroup = [Piece]()
+
+    
+    
     func find4Square(completion: () -> Void?) {
         
         var piecesToDelete = [Piece]()
@@ -431,23 +456,50 @@ class Model {
                 }) && group.pieces.contains(where: { pieceA in
                     pieceA.indexes == Indexes(x: (piece.indexes?.x!)! + 1, y: (piece.indexes?.y!)! + 1)
                 }) {
-                    for piece in group.pieces {
-                        
-                        piecesToDelete.append(piece)
-
+                    
+                    
+                    
+                    if !group2Delete.contains(where: { (group1) -> Bool in
+                        group1.id == piece.groupNumber
+                    } ) {
+                        group2Delete.append(group)
                     }
                     
-                    if !group2Delete.contains(where: { (groupZ) in
+                    for pieceX in group.pieces {
+                        
+                        if pieceX.indexes == Indexes(x: (piece.indexes?.x!)!, y: (piece.indexes?.y!)!) {
+                            piecesToDelete.append(pieceX)
 
-                        groupZ.id == piece.groupNumber
-                    }) {
-                        group2Delete.append(group)
-//                        print("ADDED Group to delete with a group number of \(group.id)")
+
+                        } else if pieceX.indexes == Indexes(x: (piece.indexes?.x!)! + 1,y: (piece.indexes?.y!)!) {
+                            piecesToDelete.append(pieceX)
+
+
+                        } else if pieceX.indexes == Indexes(x: (piece.indexes?.x!)! + 1,y: (piece.indexes?.y!)! + 1) {
+                            piecesToDelete.append(pieceX)
+
+
+                        } else if pieceX.indexes == Indexes(x: (piece.indexes?.x!)! ,y: (piece.indexes?.y!)! + 1) {
+                            piecesToDelete.append(pieceX)
+
+
+                        } else {
+                            
+                            
+                            pieces2Regroup.append(pieceX)
+                            
+                        }
+
 
                     }
+
                 }
+                
+                
             }
         }
+        
+        
         
         for piece in piecesToDelete {
             
@@ -464,14 +516,35 @@ class Model {
                 piece.id == pieceB.id
 
             }
+            
+            
         }
+        
+        
+        
                 
         for groupXXX in group2Delete {
             board.pieceGroups.removeAll { (groupAA) in
                 groupAA.id == groupXXX.id
             }
+            
+        }
+        
+        for pieceQ in pieces2Regroup {
+            
+            print("%%%%%%%%%%%%%%%%%")
+            print(pieceQ.indexes)
+            
+            let groupQ = Group(pieces: [pieceQ])
+            groupQ.id = groupIDMax + 1
+            pieceQ.groupNumber = groupIDMax + 1
+
+            board.pieceGroups.append(groupQ)
+            groupIDMax += 1
         }
 
+        pieces2Regroup.removeAll()
+        
         
         //MARK: Try to make it that a new piece is added here
         
@@ -508,7 +581,7 @@ class Model {
 //        }
         
         
-        
+        groupPiecesTogether(){}
         
         updateBoard()
         
