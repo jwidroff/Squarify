@@ -437,22 +437,35 @@ extension ViewController: ModelDelegate {
     
     func removeView(view: UIView) {
         
-      
-        UIView.animate(withDuration: 0.25, delay: 0.5, animations: {
-//        UIView.animate(withDuration: 0.25) {
+        let scale = CGAffineTransform(scaleX: 2, y: 2)
+        let scale2 = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        
+        let rotate = CGAffineTransform(rotationAngle: CGFloat.pi)
+        
+        
+//        UIView.animate(withDuration: 0.25, delay: 0.5, animations: {
+        UIView.animate(withDuration: 0.25,delay: 0.5) {
+            
+            
             
 //            self.model.board.view.layer.mask?.shadowOpacity = 0.2
 //            self.model.board.view.bringSubviewToFront(view)
-            let scale = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            
+
 //            self.model.board.view.layer.mask?.shadowOpacity = 0.1
 //            self.model.board.view.bringSubviewToFront(view)
-            view.transform = scale
+//            view.transform = scale
             
-//        } completion: { (true) in
+            view.transform = scale2.rotated(by: CGFloat.pi)
 
-            
-            
-        })
+//            view.transform = rotate
+
+
+        } completion: { (true) in
+
+//            view.transform = scale2.rotated(by: CGFloat.pi)
+
+        }
     }
     
     func groupTogether(view: UIView, side: String, color: UIColor) {
